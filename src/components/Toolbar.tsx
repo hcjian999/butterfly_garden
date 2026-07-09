@@ -41,7 +41,7 @@ export function Toolbar({ editMode, onToggleEditMode }: ToolbarProps) {
 
   return (
     <div className="bg-white border-b px-4 py-2 flex items-center gap-3 shadow-sm shrink-0">
-      <h1 className="text-lg font-bold text-gray-800 whitespace-nowrap">🦋 蝴蝶花園管理系統</h1>
+      <h1 className="text-lg font-bold text-gray-800 whitespace-nowrap">🦋 清華蝴蝶園導覽統計系統</h1>
       <div className="flex-1" />
       <button
         onClick={onToggleEditMode}

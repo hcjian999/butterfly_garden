@@ -1,6 +1,6 @@
-# 蝴蝶花園管理系統
+# 清華蝴蝶園導覽統計系統
 
-> Butterfly Garden Management System
+> NTHU Butterfly Garden Guide & Statistics System
 
 ---
 
@@ -17,7 +17,7 @@
 
 ## 專案簡介
 
-一個基於 SVG 蝴蝶花園輪廓地圖的互動式生態記錄系統。
+清華大學蝴蝶園的互動式導覽與生態統計系統，基於 SVG 蝴蝶花園輪廓地圖。
 
 - 🌿 在地圖上標記植物位置，記錄名稱、學名、數量、照片
 - 🥚 在植物下記錄蝴蝶卵的發現（蝶種、數量、日期、照片）
