@@ -49,6 +49,8 @@ function gardenReducer(state: GardenState, action: GardenAction): GardenState {
       return action.payload;
     case 'IMPORT_STATE':
       return action.payload;
+    case 'DELETE_ALL_RECORDS':
+      return { ...state, butterflyRecords: [] };
     default:
       return state;
   }

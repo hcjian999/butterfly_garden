@@ -44,5 +44,6 @@ export type GardenAction =
   | { type: 'UPDATE_RECORD'; payload: ButterflyRecord }
   | { type: 'DELETE_RECORD'; payload: string }
   | { type: 'LOAD_STATE'; payload: GardenState }
-  | { type: 'IMPORT_STATE'; payload: GardenState };
+  | { type: 'IMPORT_STATE'; payload: GardenState }
+  | { type: 'DELETE_ALL_RECORDS' };
 

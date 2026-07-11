@@ -78,6 +78,16 @@ export function Toolbar({ onToggleSidebar, editMode, onToggleEditMode }: Toolbar
           >
             匯入 JSON
           </button>
+          <button
+            onClick={() => {
+              if (confirm('確定要清除所有植物的卵、幼蟲和蛹記錄嗎？此操作無法復原。')) {
+                dispatch({ type: 'DELETE_ALL_RECORDS' });
+              }
+            }}
+            className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700"
+          >
+            🧹 清除記錄
+          </button>
         </>
       )}
       <button
@@ -87,7 +97,7 @@ export function Toolbar({ onToggleSidebar, editMode, onToggleEditMode }: Toolbar
         匯出 JSON
       </button>
       <div className="flex items-center gap-2 text-xs text-gray-500 ml-2 whitespace-nowrap">
-        <span className="font-medium">荒野42解雲杉</span>
+        <span className="font-medium">荒野新竹42解雲杉</span>
         <a href="mailto:dave.jhc@gmail.com" className="text-blue-500 hover:underline">
           dave.jhc@gmail.com
         </a>

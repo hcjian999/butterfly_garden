@@ -56,11 +56,11 @@ npm run build      # 建置單檔案產出 (docs/index.html)
 
 本專案採用 [MIT License](LICENSE) 授權。
 
-Copyright © 2026 荒野42解雲杉
+Copyright © 2026 荒野新竹42解雲杉
 
 ---
 
 ## 📧 聯絡
 
-- 作者：荒野42解雲杉
+- 作者：荒野新竹42解雲杉
 - Email：[dave.jhc@gmail.com](mailto:dave.jhc@gmail.com)
