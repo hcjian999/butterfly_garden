@@ -67,14 +67,8 @@ export function Toolbar({ onToggleSidebar, editMode, onToggleEditMode }: Toolbar
       {editMode && (
         <>
           <button
-            onClick={handleLoadSample}
-            className="px-3 py-1 text-sm bg-green-500 text-white rounded hover:bg-green-600"
-          >
-            載入範例
-          </button>
-          <button
             onClick={handleImport}
-            className="px-3 py-1 text-sm bg-orange-500 text-white rounded hover:bg-orange-600"
+            className="px-3 py-1 text-sm bg-orange-500 text-white rounded hover:bg-orange-600 whitespace-nowrap"
           >
             匯入 JSON
           </button>
@@ -84,7 +78,7 @@ export function Toolbar({ onToggleSidebar, editMode, onToggleEditMode }: Toolbar
                 dispatch({ type: 'DELETE_ALL_RECORDS' });
               }
             }}
-            className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700"
+            className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700 whitespace-nowrap"
           >
             🧹 清除記錄
           </button>
@@ -92,11 +86,11 @@ export function Toolbar({ onToggleSidebar, editMode, onToggleEditMode }: Toolbar
       )}
       <button
         onClick={exportJSON}
-        className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
+        className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 whitespace-nowrap"
       >
         匯出 JSON
       </button>
-      <div className="flex items-center gap-2 text-xs text-gray-500 ml-2 whitespace-nowrap">
+      <div className="hidden sm:flex items-center gap-2 text-xs text-gray-500 ml-2 whitespace-nowrap">
         <span className="font-medium">荒野新竹42解雲杉</span>
         <a href="mailto:dave.jhc@gmail.com" className="text-blue-500 hover:underline">
           dave.jhc@gmail.com
