@@ -21,6 +21,8 @@ interface GardenMapProps {
   onMouseDown: (e: React.MouseEvent) => void;
   onMouseMove: (e: React.MouseEvent) => void;
   onMouseUp: () => void;
+  onTouchStart: (e: React.TouchEvent) => void;
+  onTouchMove: (e: React.TouchEvent) => void;
   mapMoved: React.MutableRefObject<boolean>;
   screenToSVG: (x: number, y: number) => { x: number; y: number } | null;
   zoomIn: () => void;
@@ -44,6 +46,8 @@ export function GardenMap({
   onMouseDown,
   onMouseMove,
   onMouseUp,
+  onTouchStart,
+  onTouchMove,
   mapMoved,
   screenToSVG,
   zoomIn,
@@ -132,6 +136,8 @@ export function GardenMap({
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
         onMouseLeave={onMouseUp}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
       >
         <g transform={`translate(${view.tx}, ${view.ty}) scale(${view.scale})`}>
           <g dangerouslySetInnerHTML={{ __html: svgWithPointerEvents }} />

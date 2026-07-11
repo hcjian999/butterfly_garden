@@ -29,6 +29,7 @@ function getViewBoxParams(el: HTMLElement): ViewBoxParams | null {
 export function useMapInteraction() {
   const [view, setView] = useState<ViewState>({ tx: 0, ty: 0, scale: 1 });
   const [isDragging, setIsDragging] = useState(false);
+  const [touching, setTouching] = useState(false);
   const dragStart = useRef<{ x: number; y: number; tx: number; ty: number }>({ x: 0, y: 0, tx: 0, ty: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const mapMoved = useRef(false);
@@ -141,6 +142,32 @@ export function useMapInteraction() {
     setView({ tx: 0, ty: 0, scale: 1 });
   }, []);
 
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      setIsDragging(true);
+      mapMoved.current = false;
+      dragStart.current = { x: touch.clientX, y: touch.clientY, tx: view.tx, ty: view.ty };
+    }
+  }, [view.tx, view.ty]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length !== 1) return;
+    const touch = e.touches[0];
+    mapMoved.current = true;
+    const el = containerRef.current;
+    if (!el) return;
+    const vb = getViewBoxParams(el);
+    if (!vb) return;
+    const dx = (touch.clientX - dragStart.current.x) / vb.ratio;
+    const dy = (touch.clientY - dragStart.current.y) / vb.ratio;
+    setView((v) => ({
+      ...v,
+      tx: dragStart.current.tx + dx,
+      ty: dragStart.current.ty + dy,
+    }));
+  }, []);
+
   const centerOn = useCallback((svgX: number, svgY: number) => {
     setView((v) => {
       const el = containerRef.current;
@@ -174,5 +201,7 @@ export function useMapInteraction() {
     resetView,
     mapMoved,
     centerOn,
+    handleTouchStart,
+    handleTouchMove,
   };
 }
