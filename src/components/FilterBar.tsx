@@ -7,7 +7,7 @@ interface FilterBarProps {
 
 const filters: { key: string; label: string; icon: string }[] = [
   { key: 'all', label: '全部', icon: '🌿' },
-  { key: 'plant', label: '植物', icon: '🌿' },
+  { key: 'plant', label: '無紀錄', icon: '🌱' },
   { key: 'egg', label: '有卵', icon: '🥚' },
   { key: 'larva', label: '有幼蟲', icon: '🐛' },
   { key: 'pupa', label: '有蛹', icon: '🦪' },

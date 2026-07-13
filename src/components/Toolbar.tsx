@@ -53,16 +53,14 @@ export function Toolbar({ onToggleSidebar, editMode, onToggleEditMode }: Toolbar
       </button>
       <h1 className="text-base md:text-lg font-bold text-gray-800 whitespace-nowrap">🦋 清華蝴蝶園導覽統計系統</h1>
       <div className="flex-1" />
+      <span className="text-sm text-gray-600 whitespace-nowrap font-medium">
+        {editMode ? '✏️ 編輯模式' : '🔒 瀏覽模式'}
+      </span>
       <button
         onClick={onToggleEditMode}
-        className={`px-2 md:px-3 py-1.5 rounded text-xs md:text-sm font-medium transition-colors ${
-          editMode
-            ? 'bg-red-500 text-white hover:bg-red-600'
-            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-        }`}
+        className="px-2 md:px-3 py-1.5 rounded text-xs md:text-sm bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors whitespace-nowrap"
       >
-        {editMode ? '✏️' : '🔒'}
-        <span className="hidden md:inline ml-1">編輯模式</span>
+        切換<span className="hidden md:inline">模式</span>
       </button>
       {editMode && (
         <>

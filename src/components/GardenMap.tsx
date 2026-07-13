@@ -110,7 +110,10 @@ export function GardenMap({
         return false;
       }
     }
-    if (filterType !== 'all' && filterType !== 'plant') {
+    if (filterType === 'plant') {
+      return !state.butterflyRecords.some((r) => r.plantId === p.id);
+    }
+    if (filterType !== 'all') {
       const typeMap: Record<string, string> = { egg: 'egg', larva: 'larva', pupa: 'pupa' };
       const targetType = typeMap[filterType];
       return state.butterflyRecords.some((r) => r.plantId === p.id && r.type === targetType);
@@ -129,7 +132,7 @@ export function GardenMap({
         width="100%"
         height="100%"
         viewBox={`0 0 ${svgWidth} ${svgHeight}`}
-        style={{ cursor: isDragging ? 'grabbing' : editMode ? 'crosshair' : 'grab' }}
+        style={{ cursor: isDragging ? 'grabbing' : editMode ? 'crosshair' : 'grab', touchAction: 'none' }}
         onClick={handleSVGClick}
         onWheel={onWheel}
         onMouseDown={onMouseDown}

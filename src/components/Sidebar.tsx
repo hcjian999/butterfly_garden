@@ -33,7 +33,10 @@ export function Sidebar({
           }
         }
       }
-      if (filterType !== 'all' && filterType !== 'plant') {
+      if (filterType === 'plant') {
+        return !state.butterflyRecords.some((r) => r.plantId === p.id);
+      }
+      if (filterType !== 'all') {
         const typeMap: Record<string, string> = { egg: 'egg', larva: 'larva', pupa: 'pupa' };
         return state.butterflyRecords.some((r) => r.plantId === p.id && r.type === typeMap[filterType]);
       }
@@ -100,6 +103,12 @@ export function Sidebar({
             </div>
           );
         })}
+      </div>
+      <div className="md:hidden border-t p-3 text-xs text-gray-500 shrink-0">
+        <div className="font-medium mb-1">荒野新竹42解雲杉</div>
+        <a href="mailto:dave.jhc@gmail.com" className="text-blue-500 hover:underline">
+          dave.jhc@gmail.com
+        </a>
       </div>
     </div>
   );

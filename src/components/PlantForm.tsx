@@ -62,7 +62,7 @@ export function PlantForm({ onClose, onSave, initialPos, editingPlant }: PlantFo
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={handleOverlayClick}>
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-lg md:max-h-[90vh] h-[100dvh] md:h-auto md:rounded-lg rounded-none overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <div className="p-6">
           <h2 className="text-xl font-bold mb-4">{isEdit ? '編輯植物' : '新增植物'}</h2>
           <form onSubmit={handleSubmit} className="space-y-4">

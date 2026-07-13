@@ -29,8 +29,8 @@ function getViewBoxParams(el: HTMLElement): ViewBoxParams | null {
 export function useMapInteraction() {
   const [view, setView] = useState<ViewState>({ tx: 0, ty: 0, scale: 1 });
   const [isDragging, setIsDragging] = useState(false);
-  const [touching, setTouching] = useState(false);
   const dragStart = useRef<{ x: number; y: number; tx: number; ty: number }>({ x: 0, y: 0, tx: 0, ty: 0 });
+  const pinchDist = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const mapMoved = useRef(false);
 
@@ -143,30 +143,70 @@ export function useMapInteraction() {
   }, []);
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    e.preventDefault();
     if (e.touches.length === 1) {
       const touch = e.touches[0];
       setIsDragging(true);
+      pinchDist.current = 0;
       mapMoved.current = false;
       dragStart.current = { x: touch.clientX, y: touch.clientY, tx: view.tx, ty: view.ty };
+    } else if (e.touches.length === 2) {
+      setIsDragging(false);
+      pinchDist.current = Math.hypot(
+        e.touches[1].clientX - e.touches[0].clientX,
+        e.touches[1].clientY - e.touches[0].clientY
+      );
+      dragStart.current = {
+        x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+        y: (e.touches[0].clientY + e.touches[1].clientY) / 2,
+        tx: view.tx,
+        ty: view.ty,
+      };
     }
   }, [view.tx, view.ty]);
 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (e.touches.length !== 1) return;
-    const touch = e.touches[0];
-    mapMoved.current = true;
-    const el = containerRef.current;
-    if (!el) return;
-    const vb = getViewBoxParams(el);
-    if (!vb) return;
-    const dx = (touch.clientX - dragStart.current.x) / vb.ratio;
-    const dy = (touch.clientY - dragStart.current.y) / vb.ratio;
-    setView((v) => ({
-      ...v,
-      tx: dragStart.current.tx + dx,
-      ty: dragStart.current.ty + dy,
-    }));
-  }, []);
+    e.preventDefault();
+    if (e.touches.length === 1 && isDragging) {
+      const touch = e.touches[0];
+      mapMoved.current = true;
+      const el = containerRef.current;
+      if (!el) return;
+      const vb = getViewBoxParams(el);
+      if (!vb) return;
+      const dx = (touch.clientX - dragStart.current.x) / vb.ratio;
+      const dy = (touch.clientY - dragStart.current.y) / vb.ratio;
+      setView((v) => ({
+        ...v,
+        tx: dragStart.current.tx + dx,
+        ty: dragStart.current.ty + dy,
+      }));
+    } else if (e.touches.length === 2 && pinchDist.current > 0) {
+      const t0 = e.touches[0];
+      const t1 = e.touches[1];
+      const dist = Math.hypot(t1.clientX - t0.clientX, t1.clientY - t0.clientY);
+      const scaleFactor = dist / pinchDist.current;
+      pinchDist.current = dist;
+      const midX = (t0.clientX + t1.clientX) / 2;
+      const midY = (t0.clientY + t1.clientY) / 2;
+      const el = containerRef.current;
+      if (!el) return;
+      const vb = getViewBoxParams(el);
+      if (!vb) return;
+      const rect = el.getBoundingClientRect();
+      const vbx = (midX - rect.left - vb.offsetX) / vb.ratio;
+      const vby = (midY - rect.top - vb.offsetY) / vb.ratio;
+      setView((v) => {
+        const newScale = Math.max(0.15, Math.min(8, v.scale * scaleFactor));
+        const ratio = newScale / v.scale;
+        return {
+          tx: vbx - (vbx - v.tx) * ratio,
+          ty: vby - (vby - v.ty) * ratio,
+          scale: newScale,
+        };
+      });
+    }
+  }, [isDragging]);
 
   const centerOn = useCallback((svgX: number, svgY: number) => {
     setView((v) => {
