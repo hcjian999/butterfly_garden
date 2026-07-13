@@ -41,7 +41,7 @@ export function Toolbar({ onToggleSidebar, editMode, onToggleEditMode }: Toolbar
   };
 
   return (
-    <div className="bg-white border-b px-4 py-2 flex items-center gap-3 shadow-sm shrink-0">
+    <div className="bg-white border-b px-4 py-2 flex items-center gap-3 shadow-sm shrink-0 overflow-x-auto">
       <button
         onClick={onToggleSidebar}
         className="md:hidden flex-shrink-0 p-2 rounded hover:bg-gray-100"
