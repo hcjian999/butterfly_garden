@@ -1,4 +1,4 @@
-# 🦋 清華蝴蝶園導覽統計系統
+# 🦋 清華蝴蝶園導覽統計 v1.2.1
 
 > NTHU Butterfly Garden Guide & Statistics System
 

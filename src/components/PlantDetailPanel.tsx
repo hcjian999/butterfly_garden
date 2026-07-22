@@ -118,7 +118,7 @@ export function PlantDetailPanel({ plant, records, editMode, onClose }: PlantDet
       </div>
 
       {expandedPhoto && (
-        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center" onClick={() => setExpandedPhoto(null)}>
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center" onClick={(e) => { e.stopPropagation(); setExpandedPhoto(null); }}>
           <img src={expandedPhoto} alt="" className="max-w-[90vw] max-h-[90vh] object-contain" />
         </div>
       )}

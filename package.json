@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && copy docs\\index.html docs\\butterfly_garden.html",
     "preview": "vite preview"
   },
   "dependencies": {

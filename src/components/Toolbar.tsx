@@ -51,7 +51,7 @@ export function Toolbar({ onToggleSidebar, editMode, onToggleEditMode }: Toolbar
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
-      <h1 className="text-base md:text-lg font-bold text-gray-800 whitespace-nowrap">🦋 清華蝴蝶園導覽統計系統</h1>
+      <h1 className="text-base md:text-lg font-bold text-gray-800 whitespace-nowrap">🦋 清華蝴蝶園導覽統計 <span className="text-xs text-gray-400 font-normal">v1.2.1</span></h1>
       <div className="flex-1" />
       <span className="text-sm text-gray-600 whitespace-nowrap font-medium">
         {editMode ? '✏️ 編輯模式' : '🔒 瀏覽模式'}

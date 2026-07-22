@@ -166,6 +166,9 @@ export function GardenMap({
         <button onClick={zoomOut} className="w-8 h-8 bg-white rounded-full shadow flex items-center justify-center text-lg hover:bg-gray-100" title="縮小">−</button>
         <button onClick={resetView} className="w-8 h-8 bg-white rounded-full shadow flex items-center justify-center text-sm hover:bg-gray-100" title="重置">⊡</button>
       </div>
+      <div className="absolute bottom-4 right-4 text-xs text-gray-400 bg-white/80 px-2 py-1 rounded pointer-events-none">
+        v1.2.1
+      </div>
       {showForm && (
         <PlantForm
           onClose={handleFormClose}
